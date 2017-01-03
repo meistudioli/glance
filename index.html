@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" x-frame-options="sameorigin">
+<head>
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+<meta http-equiv="PRAGMA" content="NO-CACHE">
+<meta http-equiv="Expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<meta http-equiv="imagetoolbar" content="no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="description" content="接觸過 scrollspy 後, 一直想要寫個簡單的 extension 來輔助、監聽特定的 element 是否在當前的 viewport 中, 透過這樣的監聽, 可以讓我們做出更多有趣的變化, 更能把資源用在刀口子上, 豐富當前的使用體驗。於是筆者便擴展 navigator, 透過 method - glance 來動態增減監聽, 本範例便是 glance 的務實應用, 我們先在第一屏設置一 video, 並驅動它進行播放, 當 user scroll page 後, 便會偵測該 video 是否在當前 viewport 中, 若在則持續進行播放, 反之, 則會讓它 fix 在畫面右下角處播放, 如影隨形, 讓 user 觀看 video 不會因為 scroll 的動作而 lost 任一 sense">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@mei">
+<meta name="twitter:creator" content="@mei">
+<meta name="twitter:title" content="glance Prototype">
+<meta name="twitter:description" content="接觸過 scrollspy 後, 一直想要寫個簡單的 extension 來輔助、監聽特定的 element 是否在當前的 viewport 中, 透過這樣的監聽, 可以讓我們做出更多有趣的變化, 更能把資源用在刀口子上, 豐富當前的使用體驗。於是筆者便擴展 navigator, 透過 method - glance 來動態增減監聽, 本範例便是 glance 的務實應用, 我們先在第一屏設置一 video, 並驅動它進行播放, 當 user scroll page 後, 便會偵測該 video 是否在當前 viewport 中, 若在則持續進行播放, 反之, 則會讓它 fix 在畫面右下角處播放, 如影隨形, 讓 user 觀看 video 不會因為 scroll 的動作而 lost 任一 sense">
+<meta name="twitter:image:src" content="http://mei.homin.com.tw/img/preview/glance.png">
+<meta property="og:title" content="glance Prototype">
+<meta property="og:site_name" content="mei">
+<meta property="og:description" content="接觸過 scrollspy 後, 一直想要寫個簡單的 extension 來輔助、監聽特定的 element 是否在當前的 viewport 中, 透過這樣的監聽, 可以讓我們做出更多有趣的變化, 更能把資源用在刀口子上, 豐富當前的使用體驗。於是筆者便擴展 navigator, 透過 method - glance 來動態增減監聽, 本範例便是 glance 的務實應用, 我們先在第一屏設置一 video, 並驅動它進行播放, 當 user scroll page 後, 便會偵測該 video 是否在當前 viewport 中, 若在則持續進行播放, 反之, 則會讓它 fix 在畫面右下角處播放, 如影隨形, 讓 user 觀看 video 不會因為 scroll 的動作而 lost 任一 sense">
+<meta property="og:image" content="http://mei.homin.com.tw/img/preview/glance.png">
+<title>glance Prototype</title>
+<link rel="dns-prefetch" href="//mei.homin.com.tw">
+<link rel="canonical" href="http://mei.homin.com.tw/glancePrototype.html">
+<link rel="stylesheet" href="css/cssbase.css">
+<link rel="stylesheet" href="css/adornFormElements.css">
+<link rel="stylesheet" href="css/glance.css">
+<script src="js/pageRender.js" data-source="js/glance.js&js/glanceInit.js"></script>
+</head>
+
+<body>
+<header id="hd" role="banner">
+	<h1>glance Prototype</h1>
+</header>
+
+<main id="bd" role="main">
+	<section class="unit">
+		<h2>Section 1</h2>
+		<div class="defult-container">
+			<div class="irwrap">
+				<div class="irens">
+					<video poster="img/adele.hello.jpg" preload="auto" title="Adele - Hello" controls playsinline>
+						<source src="http://mei.homin.com.tw/video/adele-hello.mp4" type="video/mp4">
+					</video>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="unit">
+		<h2>Section 2</h2>
+	</section>
+	<section class="unit">
+		<h2>Section 3</h2>
+	</section>
+
+	<aside class="perspective hide">
+		<h2>perspective</h2>
+		<div class="irwrap">
+			<div class="irens"></div>
+		</div>
+	</aside>
+
+</main>
+
+<footer id="ft">
+	<small role="contentinfo">Powered by mei's studio.</small>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "glance Prototype",
+  "url": "http://mei.homin.com.tw/glancePrototype.html",
+  "description": "接觸過 scrollspy 後, 一直想要寫個簡單的 extension 來輔助、監聽特定的 element 是否在當前的 viewport 中, 透過這樣的監聽, 可以讓我們做出更多有趣的變化, 更能把資源用在刀口子上, 豐富當前的使用體驗。於是筆者便擴展 navigator, 透過 method - glance 來動態增減監聽, 本範例便是 glance 的務實應用, 我們先在第一屏設置一 video, 並驅動它進行播放, 當 user scroll page 後, 便會偵測該 video 是否在當前 viewport 中, 若在則持續進行播放, 反之, 則會讓它 fix 在畫面右下角處播放, 如影隨形, 讓 user 觀看 video 不會因為 scroll 的動作而 lost 任一 sense",
+  "image": "http://mei.homin.com.tw/img/preview/glance.png",
+  "author": {
+	  "@type": "Person",
+	  "name": "Paul Li",
+	  "jobTitle": "Front End engineer",
+	  "affiliation": "mei's studio",
+	  "additionalName": "mei",
+	  "url": "https://www.facebook.com/mei.studio.li",
+	  "image": "https://graph.facebook.com/mei.studio.li/picture",
+	  "brand": "mei's studio",
+	  "familyName": "Li",
+	  "gender": "M",
+	  "givenName": "Paul",
+	  "owns": "mei's studio",
+	  "worksFor": "Yahoo",
+	  "description": "People who loves all front end skills"
+  },
+  "dateCreated": "2016-12-26",
+  "datePublished": "2016-12-26",
+  "genre": "detect extension",
+  "keywords": "detect,extension,glance,viewport"
+}
+</script>
+</body>
+</html>
