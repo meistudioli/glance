@@ -1,6 +1,7 @@
 (function() {
-	var fcamelCase, camelCase, getStyle, getSize, getPageScroll, getPosition, getPageSize, viewport, tracks, addTracking, imgReady;
+	var fcamelCase, camelCase, getStyle, getSize, getPageScroll, getPosition, getPageSize, viewport, tracks, addTracking, imgReady, refresh, isRAFSupport;
 
+	isRAFSupport = (typeof requestAnimationFrame != 'undefined') ? true : false;
 	viewport = {
 		leftTop: {
 			x: 0,
@@ -84,6 +85,7 @@
 		var imgs;
 		if (typeof node.nodeType == 'undefined' || node.nodeType != 1) return;
 		
+		imgs = [];
 		if (node.childNodes.length) {
 			imgs = [].slice.call(node.querySelectorAll('img'));
 		} else if (/img/i.test(node.tagName)) imgs = [node];
@@ -100,6 +102,31 @@
 	imgReady = function(e) {
 		this.removeEventListener('load', imgReady, false);
 		navigator.glanceRefresh();
+	};
+
+	refresh = function() {
+		var scroll, page;
+
+		scroll = getPageScroll();
+		page = getPageSize();
+
+		viewport.leftTop.x = scroll[0];
+		viewport.leftTop.y = scroll[1];
+		viewport.rightBottom.x = scroll[0] + page[2];
+		viewport.rightBottom.y = scroll[1] + page[3];
+		if (viewport.rightBottom.x > page[0]) viewport.rightBottom.x = page[0];
+		if (viewport.rightBottom.y > page[1]) viewport.rightBottom.y = page[1];
+
+		tracks.forEach(
+			function(target) {
+				if (typeof target.glanceCallBack == 'undefined' || !Array.isArray(target.glanceCallBack)) return;
+				target.glanceCallBack.forEach(
+					function(callBack) {
+						callBack(target, navigator.inViewport(target));
+					}
+				);
+			}
+		);
 	};
 
 	//properties
@@ -161,28 +188,7 @@
 		glanceRefresh: {
 			configurable: false,
 			value: function(evt) {
-				var scroll, page;
-
-				scroll = getPageScroll();
-				page = getPageSize();
-
-				viewport.leftTop.x = scroll[0];
-				viewport.leftTop.y = scroll[1];
-				viewport.rightBottom.x = scroll[0] + page[2];
-				viewport.rightBottom.y = scroll[1] + page[3];
-				if (viewport.rightBottom.x > page[0]) viewport.rightBottom.x = page[0];
-				if (viewport.rightBottom.y > page[1]) viewport.rightBottom.y = page[1];
-
-				tracks.forEach(
-					function(target) {
-						if (typeof target.glanceCallBack == 'undefined' || !Array.isArray(target.glanceCallBack)) return;
-						target.glanceCallBack.forEach(
-							function(callBack) {
-								callBack(target, navigator.inViewport(target));
-							}
-						);
-					}
-				);
+				(isRAFSupport) ? requestAnimationFrame(refresh) : refresh();
 			}
 		}
 	});
@@ -195,7 +201,7 @@
 	);
 
 	if (typeof MutationObserver != 'undefined') {
-		var c, max;
+		var c, max, iid;
 
 		c = 0;
 		max = 10000;
@@ -220,8 +226,9 @@
 							navigator.glanceRefresh();
 						}
 					).observe(document.body, {childList:true, subtree:true});
+					// ).observe(document.body, {childList:true, attributes:true, subtree:true});
+					addTracking(document.body);
 				}//end if
-				addTracking(document.body);
 			}
 		, 5);
 	}//end if
